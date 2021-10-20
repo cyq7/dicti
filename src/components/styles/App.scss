@@ -1,0 +1,38 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding-bottom: 15%;
+    overflow-x: hidden;
+
+    form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .search-bar {
+            width: 70%;
+            font-size: 1.5em;
+            padding: 2% 5%;
+            margin: 3%;
+            box-shadow: 0 4px 10px #ccc;
+            border: 1px solid #eee;
+        }
+    }
+
+    .error {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 10%;
+        width: 80%;
+        border-radius: 5px;
+        background: #7455fd;
+        text-align: center;
+        padding: 10px;
+        color: #fff;
+    }
+}

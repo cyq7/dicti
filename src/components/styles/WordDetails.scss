@@ -1,0 +1,59 @@
+.word-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+
+    .definitions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 5%;
+
+        .meaning {
+            list-style-type: none;
+            padding: 2%;
+            border: 1px solid #ddd;
+            margin: 2% 0;
+            box-shadow: 0 4px 10px #ccc;
+            width: 100%;
+
+            .part-of-speech {
+                text-transform: capitalize;
+                text-align: end;
+                color: #FF6565;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            .meaning-section, 
+            h4 {
+                padding: 1%;
+                margin: 1% 0;
+            }
+
+            .definition {
+                font-weight: bold;
+            }
+
+            .example {
+                font-style: italic;
+                background: #FF656525;
+            }
+
+            .synonyms-wrap {
+                display: flex;
+                flex-wrap: wrap;
+
+                .list-item {
+                    list-style-type: none;
+                    margin: 2px 5px;
+                    padding: 2px 5px;
+                    background: #eee;
+                }
+            }
+        }
+    }
+}
