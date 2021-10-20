@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+# Dicti
+Project in progress...
+English dictionary app:
+- finding informations about english words - definitions, synonyms audio and text pronunciation, etc..
+- creating flip cards for future learning 
+- translating to other languages
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
