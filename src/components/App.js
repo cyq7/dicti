@@ -4,6 +4,7 @@ import Header from './Header'
 import WordDetails from './WordDetails';
 import FlipCards from './FlipCards'
 import NavBar from './NavBar'
+import { FiSearch } from 'react-icons/fi'
 import './styles/App.scss'
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         handleSearch();
       }}>
         <input ref={inputValueRef} className="search-bar" type="text"></input>
+        <FiSearch onClick={handleSearch} className="search-icon"/>
       </form>
       <WordDetails
         details = {activeWord}

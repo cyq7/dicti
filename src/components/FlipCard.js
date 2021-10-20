@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles/FlipCard.scss'
 
-export default function FlipCard() {
+export default function FlipCard(props) {
+    const [isFlipped, setIsFlipped] = useState(false);
+
     return (
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <span>Title</span>
+        <div onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? "flip-card flip" : "flip-card"}>
+            <div className="flip-card-inner">
+                <div className="flip-card-front">
+                    <span>{props.name}</span>
                 </div>
-                <div class="flip-card-back">
-                    <p>Definition of the word, meaning, etc. Translation will be implemented soon.</p>
+                <div className="flip-card-back">
+                    <p>{props.definition}</p>
                 </div>
             </div>
         </div>

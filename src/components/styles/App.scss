@@ -8,9 +8,11 @@
     overflow-x: hidden;
 
     form {
+        position: relative;
         width: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
 
         .search-bar {
             width: 70%;
@@ -19,6 +21,11 @@
             margin: 3%;
             box-shadow: 0 4px 10px #ccc;
             border: 1px solid #eee;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15%;
         }
     }
 
