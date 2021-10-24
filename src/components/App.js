@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Header from './Header'
 import WordDetails from './WordDetails';
@@ -28,11 +28,11 @@ function App() {
     handleSearch();
   }
 
-  useEffect(() => {
-    setTimeout(() =>{
+  if(errorOccurred) {
+    setTimeout(() => {
       setErrorOccurred(false);
     }, 4000)
-  })
+  }
 
   return (
     <div className="app">

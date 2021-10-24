@@ -12,6 +12,26 @@
         width: 100%;
         margin-top: 5%;
 
+        .word-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            width: 100%;
+
+            .audio, .open-card-form-btn {  
+                font-size: 2em;
+                background: transparent;
+                border: none;
+                margin-top: 20px;
+                cursor: pointer;
+            }
+
+            .icon {
+                pointer-events: none;
+            }
+        }
+
         .meaning {
             list-style-type: none;
             padding: 2%;

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import uuidv4 from 'uuid/v4'
+import {AiOutlineAudio} from 'react-icons/ai'
+import {VscDiffAdded} from 'react-icons/vsc'
+import FlipCardForm from './FlipCardForm';
 import './styles/WordDetails.scss'
 
 export default function WordDetails({details, handleSearch}) {
+    const [currentWord, setCurrentWord] = useState('');
+    const [currentDefinitions, setCurrentDefintions] = useState([]);
+    const [displayForm, setDisplayForm] = useState(false);
+
+    let definitions = [];
+
+    function handleClick(e) {
+        setCurrentWord(e.target.previousSibling.firstChild.innerHTML);
+        setCurrentDefintions(definitions);
+        setDisplayForm(true);
+        return definitions = [];
+    }
+
+    function closeForm() {
+        setDisplayForm(false);
+    }
+
     if (details !== "") {
         const definitionsList = details.map(word => {
         const title = word.word;
@@ -20,6 +40,8 @@ export default function WordDetails({details, handleSearch}) {
                  const antonyms = el.antonyms.map(antonym => {
                      return <li onClick={(event) => handleSearch(event.target.innerHTML)} key={antonym} className="list-item"> {antonym} </li>
                  })
+
+                 definitions.push(definition);
 
                  return (
                      <li key={definition} className="meaning">
@@ -45,8 +67,14 @@ export default function WordDetails({details, handleSearch}) {
 
         return (
             <div key={`${title} ${uuidv4()}`} className="definitions">
-                <h2>{title}</h2>
-                <p className="phonetic">- {phoneticText.length > 0 ? phoneticText[0].text : null} -</p>
+                <div className="word-label">
+                    <button className="audio"><AiOutlineAudio className='icon'/></button>
+                    <div>
+                        <h2>{title}</h2>
+                        <p className="phonetic">- {phoneticText.length > 0 ? phoneticText[0].text : null} -</p>
+                    </div>
+                    <button onClick={handleClick} className = "open-card-form-btn" > <VscDiffAdded className='icon'/></button>
+                </div>
                 <ul className="definitions">
                     {singleMeaning}
                 </ul>
@@ -57,6 +85,12 @@ export default function WordDetails({details, handleSearch}) {
         return (
             <div className="word-details">
                 {definitionsList}
+                <FlipCardForm
+                    word={currentWord}
+                    currentDefinitions = {currentDefinitions}
+                    displayForm = {displayForm}
+                    handleClose = {closeForm}
+                />
             </div>
         )
     } else {
