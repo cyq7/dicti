@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    boz-sizing: border-box;
+    box-sizing: border-box;
 }
 
 button,
@@ -42,4 +42,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+
+select::-ms-expand {
+  display: none;
 }

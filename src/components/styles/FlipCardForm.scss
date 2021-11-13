@@ -41,19 +41,43 @@
             font-size: 1.2em;
         }
 
-        select {
-            width: 80%;
-            margin: 3%;
+        .select-wrapper {
+            position: relative;
+            margin: 1em;
+            width: 90%;
 
-            option {
-                width: 80%;
-                overflow: hidden;
-                word-wrap: normal;
-                white-space: normal;
+            .select {
+                display: grid;
+                width: 100%;
+                min-width: 30ch;
+                border: 1px solid #666;
+                border-radius: 0.25em;
+                padding: 0.5em 2em 0.5em 0.5em;
+                cursor: pointer;
+                line-height: 1.1;
+                background-color: #fff;
+                align-items: center;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0.9em;
+                right: 0.5em;
+                width: 0.8em;
+                height: 0.5em;
+                background-color: #FF6565;
+                clip-path: polygon(100% 0%, 0 0%, 50% 100%);
             }
         }
 
+        textarea {
+            width: 90%;
+            padding: 0.5em;
+        }
+
         button {
+            cursor: pointer;
             border: 1px solid #FF6565;
             padding: 3% 6%;
             margin: 5%;
