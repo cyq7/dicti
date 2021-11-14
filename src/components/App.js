@@ -28,6 +28,11 @@ function App() {
     handleSearch();
   }
 
+  function handleHomeClick() {
+      setActiveWord("");
+      inputValueRef.current.value = "";
+  }
+
   if(errorOccurred) {
     setTimeout(() => {
       setErrorOccurred(false);
@@ -52,10 +57,7 @@ function App() {
         isActive={activeWord}
       />
       <NavBar
-        onHomeClick={() => {
-          setActiveWord("");
-          inputValueRef.current.value = "";
-        }}
+        onHomeClick={handleHomeClick}
       />
 
       {errorOccurred ? <div className="error show">No such word in the dictionary</div> : null}

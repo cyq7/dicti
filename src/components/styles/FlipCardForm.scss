@@ -23,13 +23,13 @@
         justify-content: center;
         background-color: transparent;
         max-width: 80vw;
-        max-height: 80vw;
         width: 400px;
-        height: 400px;
+        height: auto;
         margin: 40px 0;
         box-shadow: 0 4px 15px #ccc, 0 4px 30px #ddd;
         color: #555;
         padding: 2%;
+        text-align: center;
 
         span {
             font-size: 2em;
@@ -69,24 +69,40 @@
                 background-color: #FF6565;
                 clip-path: polygon(100% 0%, 0 0%, 50% 100%);
             }
+
+            &:focus {
+                border: 2px solid #FF6565;
+            }
         }
 
-        textarea {
+        .editableContent {
+            position: relative;
             width: 90%;
-            padding: 0.5em;
+            min-height: 100px;
+            box-shadow: 0 0 10px #999;
+            padding: 0.5rem;
+            height: auto;
+            text-align: justify;
+            border: 2px solid transparent;
+
+            &:focus {
+                border: 2px solid #FF6565;
+                outline: none;
+            }
         }
 
         button {
             cursor: pointer;
-            border: 1px solid #FF6565;
+            background: #FF6565;
             padding: 3% 6%;
             margin: 5%;
             border-radius: 5px;
-            color: #111;
+            color: #fff;
+            border: 0;
+            transition: all 0.5s ease;
 
             &:hover {
-                background: #FF6565;
-                color: #fff;
+                padding: 3% 10%;
             }
         }
     }

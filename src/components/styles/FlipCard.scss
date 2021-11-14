@@ -19,6 +19,7 @@
         transform-style: preserve-3d;
         box-shadow: 0 4px 10px #ccc;
         color: #555;
+        padding: 2%;
 
         .flip-card-front,
         .flip-card-back {
@@ -31,6 +32,7 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+            font-weight: 400;
         }
 
         .flip-card-back {
