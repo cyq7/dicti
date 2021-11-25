@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import FlipCard from './FlipCard'
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import './styles/FlipCards.scss'
 
 export default function FlipCards({isActive}) {
@@ -17,16 +18,23 @@ export default function FlipCards({isActive}) {
     return (
         <div style={isActive !== "" ? {display: 'none'} : {display: "flex"}} className="flip-cards">
             <h3>{flipCards[0] ? header : newUserHeader}</h3>
-            <ul>{flipCards.map(flipCard => {
-                return (
-                    <FlipCard 
-                        id={flipCard.id}
-                        name={flipCard.name}
-                        definition={flipCard.definition}
-                    />
-                )
-            })}
-            </ul>
+            <div className='carousel'>
+                <BiChevronLeft className="carousel-arrow left"/>
+                <ul className="cards">{flipCards.map((flipCard, index) => {
+                    let position = index > 0 ? "next-card" : index === 0 ? "active-card" : "prev-card";
+                    return (
+                        <FlipCard 
+                            key={flipCard.id}
+                            id={flipCard.id}
+                            name={flipCard.name}
+                            definition={flipCard.definition}
+                            cardStyle={position}
+                        />
+                    )
+                })}
+                </ul>
+                <BiChevronRight className="carousel-arrow right"/>
+            </div>
             <p>{flipCards[0] ? `3/${numberOfCards}` : ""}</p>
         </div>
     )

@@ -5,7 +5,7 @@ export default function FlipCard(props) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
-        <div onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? "flip-card flip" : "flip-card"}>
+        <div onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? `flip-card flip ${props.cardStyle}` : `flip-card ${props.cardStyle}`}>
             <div className="flip-card-inner">
                 <div className="flip-card-front">
                     <span>{props.name}</span>

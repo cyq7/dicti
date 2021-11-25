@@ -1,10 +1,9 @@
 .flip-card {
-    background-color: transparent;
-    max-width: 65vw;
-    max-height: 65vw;
+    position: absolute;
+    height: 100%;
     width: 300px;
-    height: 300px;
-    margin: 40px 0;
+    max-width: 65vw;
+    background: #fff;
 
     span {
         font-size: 2em;
@@ -48,5 +47,23 @@
 
 .flip-card.flip .flip-card-inner {
     transform: rotateY(180deg);
+}
+
+.prev-card {
+    left: 0;
+    transform: scale(0.95);
+    background:rgb(235, 162, 162)
+}
+
+.active-card {
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(162, 235, 162);
+    z-index: 10;
+}
+
+.next-card {
+  right: 0;
+  transform: scale(0.95);
 }
 

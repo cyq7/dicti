@@ -31,17 +31,25 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
         e.preventDefault();
         let definition = textAreaRef.current.innerText.replace(/(\r\n|\n|\r)/gm, "");
         setFlipCards(prevFlipCards => {
-            return [...prevFlipCards, {id: uuidv4(), name: word, definition: definition}]
+            return [...prevFlipCards, {
+                id: uuidv4(),
+                name: word,
+                definition: definition
+            }]
         })
         handleClose()
-        resetActiveWord()
+    }
+
+    const handleAdd = async (e) => {
+        await addFlipCard(e);
+        resetActiveWord();
     }
 
     if(displayForm) {
         return (
             <div className="flip-card-container">
                 <button onClick={handleClose} className='close'>X</button>
-                <form onSubmit={addFlipCard} className="flip-card-form">
+                <form onSubmit={handleAdd} className="flip-card-form">
                     <span>{word}</span>
                     <p>Specify word definition</p>
                     <div className="select-wrapper">
