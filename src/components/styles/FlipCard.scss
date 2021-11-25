@@ -18,7 +18,6 @@
         transition: transform 0.5s;
         transform-style: preserve-3d;
         box-shadow: 0 4px 10px #ccc;
-        color: #555;
         padding: 2%;
 
         .flip-card-front,
@@ -33,6 +32,11 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             font-weight: 400;
+            color: #000;
+            
+            p {
+                font-size: 1.2em;
+            }
         }
 
         .flip-card-back {

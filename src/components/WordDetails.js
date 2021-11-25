@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import uuidv4 from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 import {AiOutlineAudio} from 'react-icons/ai'
 import {VscDiffAdded} from 'react-icons/vsc'
 import FlipCardForm from './FlipCardForm';
 import './styles/WordDetails.scss'
 
-export default function WordDetails({details, handleSearch}) {
+export default function WordDetails({details, handleSearch, resetActiveWord}) {
     const [currentWord, setCurrentWord] = useState('');
     const [currentDefinitions, setCurrentDefintions] = useState([]);
     const [displayForm, setDisplayForm] = useState(false);
@@ -90,6 +90,7 @@ export default function WordDetails({details, handleSearch}) {
                     currentDefinitions = {currentDefinitions}
                     displayForm = {displayForm}
                     handleClose = {closeForm}
+                    resetActiveWord={resetActiveWord}
                 />
             </div>
         )

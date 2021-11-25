@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react';
-import uuidv4 from  'uuid/v4'
+import { v4 as uuidv4 } from 'uuid';
 import './styles/FlipCardForm.scss'
 
 
-export default function FlipCardForm({currentDefinitions, word, displayForm, handleClose}) {
+export default function FlipCardForm({currentDefinitions, word, displayForm, handleClose, resetActiveWord}) {
     const [flipCards, setFlipCards] = useState([]);
     const [chosenDefinition, setChosenDefinition] = useState('');
     const textAreaRef = useRef();
@@ -33,7 +33,8 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
         setFlipCards(prevFlipCards => {
             return [...prevFlipCards, {id: uuidv4(), name: word, definition: definition}]
         })
-        handleClose();
+        handleClose()
+        resetActiveWord()
     }
 
     if(displayForm) {

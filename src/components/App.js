@@ -12,6 +12,7 @@ function App() {
   const [errorOccurred, setErrorOccurred] = useState(false);
   const inputValueRef = useRef();
 
+
   function handleSearch() {
     const word = inputValueRef.current.value;
     if (word === '') return
@@ -52,6 +53,7 @@ function App() {
       <WordDetails
         details = {activeWord}
         handleSearch = {handleSearchOnClick}
+        resetActiveWord = {() => setActiveWord('')}
       />
       <FlipCards
         isActive={activeWord}

@@ -10,9 +10,13 @@ export default function FlipCards({isActive}) {
         if (storedFlipCards) setFlipCards(storedFlipCards)
     }, [isActive]);
 
+    const newUserHeader = "Learn new words by flipping dicti cards. Search for a word definition and create your first dicti!"
+    const header = "Your flip cards"
+    const numberOfCards = flipCards.length;
+
     return (
         <div style={isActive !== "" ? {display: 'none'} : {display: "flex"}} className="flip-cards">
-            <h3>Your flip cards</h3>
+            <h3>{flipCards[0] ? header : newUserHeader}</h3>
             <ul>{flipCards.map(flipCard => {
                 return (
                     <FlipCard 
@@ -23,7 +27,7 @@ export default function FlipCards({isActive}) {
                 )
             })}
             </ul>
-            <p>3/15</p>
+            <p>{flipCards[0] ? `3/${numberOfCards}` : ""}</p>
         </div>
     )
 }
