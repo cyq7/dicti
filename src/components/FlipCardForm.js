@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { GrClose } from 'react-icons/gr'
 import './styles/FlipCardForm.scss'
 
 
@@ -48,7 +49,6 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
     if(displayForm) {
         return (
             <div className="flip-card-container">
-                <button onClick={handleClose} className='close'>X</button>
                 <form onSubmit={handleAdd} className="flip-card-form">
                     <span>{word}</span>
                     <p>Specify word definition</p>
@@ -62,7 +62,8 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
                         </select>
                     </div>
                     <div className="editableContent" contentEditable suppressContentEditableWarning ref={textAreaRef}>{chosenDefinition}</div>
-                    <button type="submit">Add flip card</button>
+                    <button type="submit" className="add">Add flip card</button>
+                    <GrClose onClick={handleClose} className="cancel" />
                 </form>
             </div>
         )
