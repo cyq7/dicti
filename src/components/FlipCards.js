@@ -54,7 +54,7 @@ export default function FlipCards({isActive}) {
                     onClick={slideRight}
                 />
             </div>
-            <p>{flipCards[0] ? `3/${numberOfCards}` : ""}</p>
+            <p>{flipCards[0] ? `${index+1}/${numberOfCards}` : ""}</p>
         </div>
     )
 }
