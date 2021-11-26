@@ -23,6 +23,11 @@ export default function WordDetails({details, handleSearch, resetActiveWord}) {
         setDisplayForm(false);
     }
 
+    function playAudio(e) {
+        const audio = new Audio(e);
+        audio.play();
+    }
+
     if (details !== "") {
         const definitionsList = details.map(word => {
         const title = word.word;
@@ -68,7 +73,7 @@ export default function WordDetails({details, handleSearch, resetActiveWord}) {
         return (
             <div key={`${title} ${uuidv4()}`} className="definitions">
                 <div className="word-label">
-                    <button className="audio"><AiOutlineAudio className='icon'/></button>
+                    <button onClick={() => {playAudio(phoneticText[0].audio)}} className="audio"><AiOutlineAudio className='icon'/></button>
                     <div>
                         <h2>{title}</h2>
                         <p className="phonetic">- {phoneticText.length > 0 ? phoneticText[0].text : null} -</p>
