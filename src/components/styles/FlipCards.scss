@@ -1,16 +1,18 @@
 .flip-cards {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10% 0;
+    padding: 5% 0 0;
     width: 100%;
     text-align: center;
+    max-height: 100vh;
 
     .carousel {
         position: relative;
         width: 100%;
-        margin: 30px;
+        margin: 20px;
 
         .cards {
             position: relative;
@@ -21,10 +23,11 @@
 
         .carousel-arrow {
             position: absolute;
-            top: 40%;
+            top: 35%;
             z-index: 50;
             font-size: 4em;
             padding: 10px;
+            cursor: pointer;
 
             &:hover {
                 font-size: 5em;
@@ -43,5 +46,32 @@
     h3 {
         color: #555;
         padding: 2%;
+    }
+
+    .target-wrapper {
+        position: relative;
+        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .target {
+            height: 100%;
+            width: 40vh;
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+            transform: translateY(-10vh);
+        }
+
+        .save {
+            background: rgb(162, 255, 125);
+            border: 3px dotted rgb(72, 255, 0);
+        }
+
+        .delete {
+            background: rgb(255, 125, 125);
+            border: 3px dotted rgb(255, 0, 0);
+        }
     }
 }

@@ -55,6 +55,10 @@ export default function FlipCards({isActive}) {
                 />
             </div>
             <p>{flipCards[0] ? `${index+1}/${numberOfCards}` : ""}</p>
+            <div className="target-wrapper">
+                <div className="target save"></div>
+                <div className="target delete"></div>
+            </div>
         </div>
     )
 }

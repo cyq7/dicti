@@ -41,6 +41,7 @@
 
         .flip-card-back {
             transform: rotateY(180deg);
+            padding: 2em;
         }
     }
 
@@ -70,9 +71,25 @@
 
 .prev-card {
     transform: translateX(calc(-50% - 200px)) translateY(-20px) rotate(5deg) scale(0.85);
+
+    &:nth-child(2n) {
+        transform: translateX(calc(-50% - 200px)) translateY(-20px) rotate(10deg) scale(0.85);
+    }
+
+    &:nth-child(3n) {
+        transform: translateX(calc(-50% - 200px)) translateY(-20px) rotate(0deg) scale(0.85);
+    }
 }
 
 .next-card {
     transform: translateX(calc(-50% + 200px)) translateY(-20px) rotate(-5deg) scale(0.85);
+
+    &:nth-child(2n) {
+        transform: translateX(calc(-50% + 200px)) translateY(-20px) rotate(-10deg) scale(0.85);
+    }
+
+    &:nth-child(3n) {
+        transform: translateX(calc(-50% + 200px)) translateY(-20px) rotate(0) scale(0.85);
+    }
 }
 

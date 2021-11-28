@@ -42,8 +42,16 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
     }
 
     const handleAdd = async (e) => {
-        await addFlipCard(e);
-        resetActiveWord();
+        e.preventDefault();
+        let definition = textAreaRef.current.innerText;
+        if (definition.length < 200) {
+            await addFlipCard(e);
+            resetActiveWord();
+        } else if (definition.length === 0){
+            alert('Definition cannot be empty')
+        } else {
+            alert('Definition can contain only 300 characters')
+        }
     }
 
     if(displayForm) {

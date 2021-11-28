@@ -73,7 +73,11 @@ export default function WordDetails({details, handleSearch, resetActiveWord}) {
         return (
             <div key={`${title} ${uuidv4()}`} className="definitions">
                 <div className="word-label">
-                    <button onClick={() => {playAudio(phoneticText[0].audio)}} className="audio"><AiOutlineAudio className='icon'/></button>
+                    <button 
+                        onClick={() => {playAudio(phoneticText[0].audio)}} 
+                        className="audio">
+                        {phoneticText[0].audio ? <AiOutlineAudio className='icon'/> : null}
+                    </button>
                     <div>
                         <h2>{title}</h2>
                         <p className="phonetic">- {phoneticText.length > 0 ? phoneticText[0].text : null} -</p>
