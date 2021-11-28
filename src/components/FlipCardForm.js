@@ -30,11 +30,11 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(flipCards))
     }, [flipCards])
 
-      if (errorOccured) {
-          setTimeout(() => {
-              setErrorOccurred('');
-          }, 4000)
-      }
+    if (errorOccured) {
+        setTimeout(() => {
+            setErrorOccurred('');
+        }, 4000)
+    }
 
     function addFlipCard(e) {
         e.preventDefault();
