@@ -4,6 +4,7 @@ import Header from './Header'
 import WordDetails from './WordDetails';
 import FlipCards from './FlipCards'
 import NavBar from './NavBar'
+import Notification from './Notification'
 import { FiSearch } from 'react-icons/fi'
 import './styles/App.scss'
 
@@ -61,7 +62,11 @@ function App() {
         onHomeClick={handleHomeClick}
       />
 
-      {errorOccurred ? <div className="error show">No such word in the dictionary</div> : null}
+      {errorOccurred ? 
+      <Notification 
+        message={'No such word in the dictionary'}
+      /> 
+      : null}
     </div>
   );
 }
