@@ -42,20 +42,18 @@ export default function FlipCards({isActive}) {
             offset = e.clientX - initialX;
             card.style.left = offset + "px";
 
-            if(offset <= -120) {
+            if(offset <= -100) {
                 slideRight();
                 document.onmousemove = null;
                 if (index === numberOfCards.length - 1) {
                     card.style.left = 0;
                 } else {
-                    setTimeout(() => {
-                        card.style.left = 0;
-                    }, 500);
+                    card.style.left = 0;
                 }
                 return;
             }
 
-            if(offset >= 120) {
+            if(offset >= 100) {
                 slideLeft();
                 document.onmousemove = null;
                 if (index === 0) {
@@ -68,6 +66,14 @@ export default function FlipCards({isActive}) {
         }
 
         function onMouseUp(e) {
+            if(offset < 0 && offset > -100) {
+                e.preventDefault();
+                card.style.left = 0;
+            }
+            if(offset > 0 && offset < 100) {
+                e.preventDefault();
+                card.style.left = 0;
+            }
             document.onmousemove = null;
             document.onmouseup = null;
         }
