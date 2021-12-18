@@ -8,7 +8,8 @@ export default function FlipCard(props) {
         <article className={props.cardStyle}>
             <div 
             onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? `flip-card flip` : `flip-card`}
-            onMouseDown={props.handleMouseDown}
+            onMouseDown={props.handlePointerEvent}
+            onTouchStart={props.handlePointerEvent}
             >
             <div className="flip-card-inner">
                 <div className="flip-card-front">

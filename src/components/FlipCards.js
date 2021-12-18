@@ -28,23 +28,29 @@ export default function FlipCards({isActive}) {
         }
     }
 
-    const handleMouseDown = (e) => {
+    const onPointerEvent = (e) => {
         e.preventDefault();
+
+        let isTouchEvent = e.type === "touchstart" ? true : false;
+
         let card = e.target;
         let offset = 0;
-        let initialX = e.clientX;
-        let initialY = e.clientY;
+        let initialX = isTouchEvent ? e.touches[0].clientX : e.clientX;
+        let initialY = isTouchEvent ? e.touches[0].clientY : e.clientY;
         
-        document.onmousemove = onMouseMove;
-        document.onmouseup = onMouseUp;
+        document.onmousemove = onPointerMove;
+        document.onmouseup = onPointerEnd;
+        document.ontouchmove = onPointerMove;
+        document.ontouchend = onPointerEnd;
 
-        function onMouseMove(e) {
-            offset = e.clientX - initialX;
+        function onPointerMove(e) {
+            offset = (isTouchEvent ? e.touches[0].clientX : e.clientX) - initialX;
             card.style.left = offset + "px";
 
             if(offset <= -100) {
                 slideRight();
                 document.onmousemove = null;
+                document.ontouchmove = null;
                 if (index === numberOfCards.length - 1) {
                     card.style.left = 0;
                 } else {
@@ -56,6 +62,7 @@ export default function FlipCards({isActive}) {
             if(offset >= 100) {
                 slideLeft();
                 document.onmousemove = null;
+                document.ontouchmove = null;
                 if (index === 0) {
                     card.style.left = 0;
                 } else {
@@ -65,7 +72,7 @@ export default function FlipCards({isActive}) {
             }
         }
 
-        function onMouseUp(e) {
+        function onPointerEnd(e) {
             if(offset < 0 && offset > -100) {
                 e.preventDefault();
                 card.style.left = 0;
@@ -76,6 +83,8 @@ export default function FlipCards({isActive}) {
             }
             document.onmousemove = null;
             document.onmouseup = null;
+            document.ontouchmove = null;
+            document.ontouchend = null;
         }
     }
 
@@ -100,7 +109,7 @@ export default function FlipCards({isActive}) {
                             name={flipCard.name}
                             definition={flipCard.definition}
                             cardStyle={position}
-                            handleMouseDown={handleMouseDown}
+                            handlePointerEvent={onPointerEvent}
                         />
                     )
                 })}
