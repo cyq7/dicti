@@ -1,10 +1,16 @@
-.flip-card {
+article {
     position: absolute;
+    transition: 0.5s ease;
     height: 100%;
     width: 300px;
     max-width: 65vw;
+}
+
+.flip-card {
+    position: absolute;
+    height: 100%;
+    width: 100%;
     background: transparent;
-    transition: 0.5s ease;
 
     span {
         font-size: 2em;
@@ -21,6 +27,7 @@
         border: 1px solid rgba(0, 0, 0, 0.1);
         padding: 2%;
         background: #fff;
+        pointer-events: none;
 
         .flip-card-front,
         .flip-card-back {
@@ -34,7 +41,7 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             font-weight: 400;
-            
+
             p {
                 font-size: 1.2em;
             }
@@ -45,7 +52,6 @@
             padding: 2em;
         }
     }
-
 }
 
 .flip-card.flip .flip-card-inner {
@@ -59,7 +65,7 @@
     pointer-events: none;
 
         .flip-card-inner {
-            color: #eee;
+            color: #ddd;
             box-shadow: 0 0 5px #ccc;
         }
 }

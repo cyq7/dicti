@@ -28,8 +28,57 @@ export default function FlipCards({isActive}) {
         }
     }
 
+    const handleMouseDown = (e) => {
+        e.preventDefault();
+        let card = e.target;
+        let offset = 0;
+        let initialX = e.clientX;
+        let initialY = e.clientY;
+        
+        document.onmousemove = onMouseMove;
+        document.onmouseup = onMouseUp;
+
+        function onMouseMove(e) {
+            offset = e.clientX - initialX;
+            card.style.left = offset + "px";
+
+            if(offset <= -120) {
+                slideRight();
+                document.onmousemove = null;
+                if (index === numberOfCards.length - 1) {
+                    card.style.left = 0;
+                } else {
+                    setTimeout(() => {
+                        card.style.left = 0;
+                    }, 500);
+                }
+                return;
+            }
+
+            if(offset >= 120) {
+                slideLeft();
+                document.onmousemove = null;
+                if (index === 0) {
+                    card.style.left = 0;
+                } else {
+                    card.style.left=0;
+                }
+                return;
+            }
+        }
+
+        function onMouseUp(e) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    }
+
+
+
     return (
-        <div style={isActive !== "" ? {display: 'none'} : {display: "flex"}} className="flip-cards">
+        <div
+            className = "flip-cards"
+            style = {isActive !== "" ? {display: 'none'} : {display: "flex"}}>
             <h3>{flipCards[0] ? header : newUserHeader}</h3>
             <div className='carousel'>
                 <BsChevronCompactLeft 
@@ -45,6 +94,7 @@ export default function FlipCards({isActive}) {
                             name={flipCard.name}
                             definition={flipCard.definition}
                             cardStyle={position}
+                            handleMouseDown={handleMouseDown}
                         />
                     )
                 })}

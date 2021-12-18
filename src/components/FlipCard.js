@@ -5,7 +5,11 @@ export default function FlipCard(props) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
-        <div onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? `flip-card flip ${props.cardStyle}` : `flip-card ${props.cardStyle}`}>
+        <article className={props.cardStyle}>
+            <div 
+            onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? `flip-card flip` : `flip-card`}
+            onMouseDown={props.handleMouseDown}
+            >
             <div className="flip-card-inner">
                 <div className="flip-card-front">
                     <span>{props.name}</span>
@@ -15,5 +19,6 @@ export default function FlipCard(props) {
                 </div>
             </div>
         </div>
+        </article>
     )
 }
