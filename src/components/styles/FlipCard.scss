@@ -5,6 +5,11 @@ article {
     width: 300px;
     max-width: 65vw;
     touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
 }
 
 .flip-card {

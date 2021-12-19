@@ -6,6 +6,9 @@ import './styles/FlipCards.scss'
 export default function FlipCards({isActive}) {
     const [flipCards, setFlipCards] = useState([]);
     const [index, setIndex] = useState(0);
+    const [dropArea, setDropArea] = useState(false);
+    const [showCheck, setShowCheck] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         const storedFlipCards = JSON.parse(localStorage.getItem('learning.flipCards'))
@@ -29,14 +32,13 @@ export default function FlipCards({isActive}) {
     }
 
     const onPointerEvent = (e) => {
-        e.preventDefault();
-
         let isTouchEvent = e.type === "touchstart" ? true : false;
 
         let card = e.target;
-        let offset = 0;
-        let initialX = isTouchEvent ? e.touches[0].clientX : e.clientX;
-        let initialY = isTouchEvent ? e.touches[0].clientY : e.clientY;
+        let offsetX = 0;
+        let offsetY = 0;
+        let initialX= isTouchEvent ? e.touches[0].clientX : e.clientX;
+        let initialY = isTouchEvent ? e.touches[0].clientY: e.clientY;
         
         document.onmousemove = onPointerMove;
         document.onmouseup = onPointerEnd;
@@ -44,51 +46,65 @@ export default function FlipCards({isActive}) {
         document.ontouchend = onPointerEnd;
 
         function onPointerMove(e) {
-            offset = (isTouchEvent ? e.touches[0].clientX : e.clientX) - initialX;
-            card.style.left = offset + "px";
+            offsetX = (isTouchEvent ? e.touches[0].clientX : e.clientX) - initialX;
+            card.style.left = offsetX + "px";
+            offsetY = (isTouchEvent ? e.touches[0].clientY : e.clientY) - initialY;
+            card.style.top = offsetY + "px";
 
-            if(offset <= -100) {
+            if (offsetX <= -100 && offsetY < 50) {
                 slideRight();
                 document.onmousemove = null;
                 document.ontouchmove = null;
-                if (index === numberOfCards.length - 1) {
-                    card.style.left = 0;
-                } else {
-                    card.style.left = 0;
-                }
+                card.style.left = 0;
+                card.style.top = 0;
                 return;
             }
 
-            if(offset >= 100) {
+            if (offsetX >= 100 && offsetY < 50) {
                 slideLeft();
                 document.onmousemove = null;
                 document.ontouchmove = null;
-                if (index === 0) {
-                    card.style.left = 0;
-                } else {
-                    card.style.left=0;
-                }
+                card.style.left = 0;
+                card.style.top = 0;
                 return;
+            }
+
+            if (offsetY > 120) {
+                setDropArea(true);
+                if (offsetY > 200 && offsetY < 400 && offsetX < -50 && offsetX > -300) {
+                    setShowCheck(true);
+                } else {
+                    setShowCheck(false);
+                }
+                if (offsetY > 200 && offsetY < 400 && offsetX > 50 && offsetX < 300) {
+                    setShowDelete(true);
+                } else {
+                    setShowDelete(false);
+                }
+            } else {
+                setDropArea(false);
             }
         }
 
         function onPointerEnd(e) {
-            if(offset < 0 && offset > -100) {
-                e.preventDefault();
-                card.style.left = 0;
+            e.preventDefault();
+
+            if(offsetY > 200 && offsetX < -60) {
+                console.log("check");
+            } else if (offsetY > 200 && offsetX > 60) {
+                console.log("delete");
+            } else {
+                card.style.left = 0
+                card.style.top = 0;
             }
-            if(offset > 0 && offset < 100) {
-                e.preventDefault();
-                card.style.left = 0;
-            }
+            setDropArea(false);
+
             document.onmousemove = null;
             document.onmouseup = null;
             document.ontouchmove = null;
             document.ontouchend = null;
         }
     }
-
-
 
     return (
         <div
@@ -121,8 +137,12 @@ export default function FlipCards({isActive}) {
             </div>
             <p>{flipCards[0] ? `${index+1}/${numberOfCards}` : ""}</p>
             <div className="target-wrapper">
-                <div className="target save"></div>
-                <div className="target delete"></div>
+                <div 
+                    style={dropArea ? null : {visibility: "hidden"}} 
+                    className={showCheck ? "target save active" : "target save"}></div>
+                <div 
+                    style={dropArea ? null : {visibility: "hidden"}} 
+                    className={showDelete ? "target delete active" : "target delete"}></div>
             </div>
         </div>
     )
