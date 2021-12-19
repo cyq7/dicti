@@ -33,7 +33,6 @@ article {
         border: 1px solid rgba(0, 0, 0, 0.1);
         padding: 2%;
         background: #fff;
-        pointer-events: none;
 
         .flip-card-front,
         .flip-card-back {
@@ -46,7 +45,7 @@ article {
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            font-weight: 400;
+            pointer-events: none;
 
             p {
                 font-size: 1.2em;
@@ -104,5 +103,22 @@ article {
     &:nth-child(3n) {
         transform: translateX(calc(-50% + 200px)) translateY(-20px) rotate(-5deg) scale(0.85);
     }
+}
+
+.active-card .save-label {
+    transform: scale(0.5);
+    transition: 0.5 ease;
+    background: rgba(71, 250, 0, 0.2);
+}
+
+.active-card .delete-label {
+    transform: scale(0.5);
+    transition: 0.5 ease;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.active-card .flip .delete-label,
+.active-card .flip .save-label {
+    transform: scale(0.5) rotateY(180deg);
 }
 

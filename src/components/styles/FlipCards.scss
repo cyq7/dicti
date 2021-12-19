@@ -56,32 +56,51 @@
         justify-content: space-around;
 
         .target {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             visibility: visible;
             height: 100%;
             width: 40vh;
-            opacity: 0.3;
+            opacity: 0.5;
             border-radius: 50%;
             z-index: -1;
             transform: translateY(-10vh);
             transition: all 1s ease;
+
+            .icon {
+                font-size: 0;
+                transition: all 1s ease;
+            }
+            .icon-check {
+                color: rgb(72, 255, 0);
+            }
+            .icon-trash {
+                color: rgb(255, 0, 0);
+            }
         }
 
         .save {
-            background: rgba(71, 250, 0, 0.3);
-            border: 3px dotted rgb(72, 255, 0);
+            background: rgba(71, 250, 0, 0.1);
+            border: 3px dotted rgba(72, 255, 0, 0.3);
         }
 
         .delete {
-            background: rgba(255, 0, 0, 0.3);
-            border: 3px dotted rgb(255, 0, 0);
+            background: rgba(255, 0, 0, 0.1);
+            border: 3px dotted rgba(255, 0, 0, 0.3);
         }
 
         .save.active {
-            background: rgb(72, 255, 0);
+            background: rgba(72, 255, 0, 0.6);
+            border: 3px dotted rgb(72, 255, 0);
         }
 
         .delete.active {
-            background: rgb(255, 0, 0);
+            background: rgba(255, 0, 0, 0.6);
+            border: 3px dotted rgb(255, 0, 0);
+        }
+        .active .icon {
+            font-size: 8em;
         }
     }
 }

@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import FlipCard from './FlipCard'
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
+import {
+    BsChevronCompactLeft,
+    BsChevronCompactRight,
+    BsTrash,
+    BsCheck2
+} from 'react-icons/bs'
 import './styles/FlipCards.scss'
 
 export default function FlipCards({isActive}) {
     const [flipCards, setFlipCards] = useState([]);
     const [index, setIndex] = useState(0);
     const [dropArea, setDropArea] = useState(false);
-    const [showCheck, setShowCheck] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
+    const [cardOption, setCardOption] = useState('');
 
     useEffect(() => {
         const storedFlipCards = JSON.parse(localStorage.getItem('learning.flipCards'))
@@ -69,26 +73,21 @@ export default function FlipCards({isActive}) {
                 return;
             }
 
-            if (offsetY > 120) {
+            if (offsetY > 80) {
                 setDropArea(true);
-                if (offsetY > 200 && offsetY < 400 && offsetX < -50 && offsetX > -300) {
-                    setShowCheck(true);
-                } else {
-                    setShowCheck(false);
+                if (offsetY > 130 && offsetY < 500 && offsetX < -50 && offsetX > -500) {
+                    setCardOption('save');
                 }
-                if (offsetY > 200 && offsetY < 400 && offsetX > 50 && offsetX < 300) {
-                    setShowDelete(true);
-                } else {
-                    setShowDelete(false);
+                if(offsetY > 130 && offsetY < 500 && offsetX > 50 && offsetX < 500) {
+                    setCardOption('delete');
                 }
             } else {
+                setCardOption('');
                 setDropArea(false);
             }
         }
 
         function onPointerEnd(e) {
-            e.preventDefault();
-
             if(offsetY > 200 && offsetX < -60) {
                 console.log("check");
             } else if (offsetY > 200 && offsetX > 60) {
@@ -97,6 +96,7 @@ export default function FlipCards({isActive}) {
                 card.style.left = 0
                 card.style.top = 0;
             }
+            setCardOption("");
             setDropArea(false);
 
             document.onmousemove = null;
@@ -118,13 +118,15 @@ export default function FlipCards({isActive}) {
                 />
                 <ul className="cards">{flipCards.map((flipCard, n) => {
                     let position = n > index ? "next-card" : n === index ? "active-card" : "prev-card";
+                    let label = cardOption === 'save' ? "save-label" : cardOption === 'delete' ? "delete-label" : "";
                     return (
                         <FlipCard 
                             key={flipCard.id}
                             id={flipCard.id}
                             name={flipCard.name}
                             definition={flipCard.definition}
-                            cardStyle={position}
+                            position={position}
+                            label={label}
                             handlePointerEvent={onPointerEvent}
                         />
                     )
@@ -139,10 +141,14 @@ export default function FlipCards({isActive}) {
             <div className="target-wrapper">
                 <div 
                     style={dropArea ? null : {visibility: "hidden"}} 
-                    className={showCheck ? "target save active" : "target save"}></div>
+                    className={cardOption === 'save' ? "target save active" : "target save"}>
+                    <BsCheck2 className = "icon icon-check" />
+                    </div>
                 <div 
                     style={dropArea ? null : {visibility: "hidden"}} 
-                    className={showDelete ? "target delete active" : "target delete"}></div>
+                    className={cardOption === 'delete' ? "target delete active" : "target delete"}>
+                    <BsTrash className="icon icon-trash" />
+                    </div>
             </div>
         </div>
     )

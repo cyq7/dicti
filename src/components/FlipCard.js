@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import './styles/FlipCard.scss'
 
-export default function FlipCard(props) {
+export default function FlipCard({name, definition, handlePointerEvent, position, label}) {
     const [isFlipped, setIsFlipped] = useState(false);
 
+    const cardClass = `flip-card-inner ${label}`
+
     return (
-        <article className={props.cardStyle}>
-            <div 
+        <article className={position}>
+            <div
             onClick={() => setIsFlipped(!isFlipped)} className={isFlipped ? `flip-card flip` : `flip-card`}
-            onMouseDown={props.handlePointerEvent}
-            onTouchStart={props.handlePointerEvent}
+            onMouseDown={handlePointerEvent}
+            onTouchStart={handlePointerEvent}
             >
-            <div className="flip-card-inner">
+            <div className={cardClass}>
                 <div className="flip-card-front">
-                    <span>{props.name}</span>
+                    <span>{name}</span>
                 </div>
                 <div className="flip-card-back">
-                    <p>{props.definition}</p>
+                    <p>{definition}</p>
                 </div>
             </div>
         </div>
