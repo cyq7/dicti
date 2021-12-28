@@ -15,15 +15,17 @@ export default function FlipCards({isActive}) {
     const [cardOption, setCardOption] = useState('');
 
     const LOCAL_STORAGE_KEY = 'learning.flipCards'
-
+    const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    
     useEffect(() => {
-        const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         if (storedFlipCards) setFlipCards(storedFlipCards)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive]);
 
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(flipCards))
     }, [flipCards])
+
 
     const newUserHeader = "Learn new words by flipping dicti cards. Search for a word definition and create your first dicti!"
     const header = "Your flip cards"
@@ -121,7 +123,8 @@ export default function FlipCards({isActive}) {
     return (
         <div
             className = "flip-cards"
-            style = {isActive !== "" ? {display: 'none'} : {display: "flex"}}>
+            style = {isActive !== "" ? {display: 'none'} : {display: "flex"}}
+            >
             <h3>{flipCards[0] ? header : newUserHeader}</h3>
             <div className='carousel'>
                 <BsChevronCompactLeft 
