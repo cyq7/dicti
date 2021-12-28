@@ -14,14 +14,25 @@ export default function FlipCards({isActive}) {
     const [dropArea, setDropArea] = useState(false);
     const [cardOption, setCardOption] = useState('');
 
+    const LOCAL_STORAGE_KEY = 'learning.flipCards'
+
     useEffect(() => {
-        const storedFlipCards = JSON.parse(localStorage.getItem('learning.flipCards'))
+        const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         if (storedFlipCards) setFlipCards(storedFlipCards)
     }, [isActive]);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(flipCards))
+    }, [flipCards])
 
     const newUserHeader = "Learn new words by flipping dicti cards. Search for a word definition and create your first dicti!"
     const header = "Your flip cards"
     const numberOfCards = flipCards.length;
+
+    function removeCard(id) {
+        const newCards = flipCards.filter(card => card.id !== id);
+        setFlipCards(newCards)
+    }
 
     const slideLeft = () => {
         if(index - 1 >= 0) {
@@ -88,10 +99,11 @@ export default function FlipCards({isActive}) {
         }
 
         function onPointerEnd(e) {
+            const selectedCardID = e.target.id
             if(offsetY > 200 && offsetX < -60) {
-                console.log("check");
+                console.log("save");
             } else if (offsetY > 200 && offsetX > 60) {
-                console.log("delete");
+                removeCard(selectedCardID);
             } else {
                 card.style.left = 0
                 card.style.top = 0;
