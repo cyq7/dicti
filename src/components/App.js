@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Header from './Header'
-import WordDetails from './WordDetails';
+import WordDetails from './WordDetails'
 import FlipCards from './FlipCards'
 import NavBar from './NavBar'
 import Notification from './Notification'
+import Stats from './Stats'
 import { FiSearch } from 'react-icons/fi'
 import './styles/App.scss'
 
@@ -12,6 +13,9 @@ function App() {
   const [activeWord, setActiveWord] = useState('');
   const [errorOccurred, setErrorOccurred] = useState(false);
   const inputValueRef = useRef();
+
+    const LOCAL_STORAGE_KEY = 'learning.flipCards'
+    const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
 
   function handleSearch() {
     const word = inputValueRef.current.value;
@@ -57,11 +61,14 @@ function App() {
       />
       <FlipCards
         isActive={activeWord}
+        storedFlipCards={storedFlipCards}
       />
       <NavBar
         onHomeClick={handleHomeClick}
       />
-
+      <Stats 
+        storedFlipCards={storedFlipCards}
+      />
       {errorOccurred ? 
       <Notification 
         message={'No such word in the dictionary'}

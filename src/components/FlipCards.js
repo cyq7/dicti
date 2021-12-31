@@ -8,16 +8,14 @@ import {
 } from 'react-icons/bs'
 import './styles/FlipCards.scss'
 
-export default function FlipCards({isActive}) {
+export default function FlipCards({storedFlipCards, isActive}) {
     const [flipCards, setFlipCards] = useState([]);
     const [index, setIndex] = useState(0);
     const [dropArea, setDropArea] = useState(false);
     const [cardOption, setCardOption] = useState('');
 
     const LOCAL_STORAGE_KEY = 'learning.flipCards'
-    const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     const cardsToLearn = flipCards.filter(card => !card.learned)
-    const savedCards = flipCards.filter(card => card.learned);
 
     useEffect(() => {
         setFlipCards(storedFlipCards);
@@ -173,15 +171,6 @@ export default function FlipCards({isActive}) {
                     <BsTrash className="icon icon-trash" />
                     </div>
             </div>
-            <ul>
-            {savedCards.map(card => {
-                return (
-                    <li>
-                        <span>{card.name}</span> - {card.definition}
-                    </li>
-                )
-            })}
-            </ul>
         </div>
     )
 }
