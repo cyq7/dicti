@@ -16,26 +16,34 @@ export default function FlipCards({isActive}) {
 
     const LOCAL_STORAGE_KEY = 'learning.flipCards'
     const storedFlipCards = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    
+    const cardsToLearn = flipCards.filter(card => !card.learned)
+    const savedCards = flipCards.filter(card => card.learned);
+
     useEffect(() => {
-        if (storedFlipCards) setFlipCards(storedFlipCards)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        setFlipCards(storedFlipCards);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive]);
 
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(flipCards))
     }, [flipCards])
 
-
     const newUserHeader = "Learn new words by flipping dicti cards. Search for a word definition and create your first dicti!"
     const header = "Your flip cards"
-    const numberOfCards = flipCards.length;
+    const numberOfCards = cardsToLearn.length;
 
     function removeCard(id) {
         const newCards = flipCards.filter(card => card.id !== id);
         setFlipCards(newCards)
     }
 
+    function saveCard(id) {
+        const newCards = [...flipCards]
+        const selectedCard = newCards.find(card => card.id === id);
+        selectedCard.learned = !selectedCard.learned;
+        setFlipCards(newCards);
+    }
+ 
     const slideLeft = () => {
         if(index - 1 >= 0) {
             setIndex(index - 1);
@@ -103,7 +111,7 @@ export default function FlipCards({isActive}) {
         function onPointerEnd(e) {
             const selectedCardID = e.target.id
             if(offsetY > 200 && offsetX < -60) {
-                console.log("save");
+                saveCard(selectedCardID);
             } else if (offsetY > 200 && offsetX > 60) {
                 removeCard(selectedCardID);
             } else {
@@ -125,13 +133,13 @@ export default function FlipCards({isActive}) {
             className = "flip-cards"
             style = {isActive !== "" ? {display: 'none'} : {display: "flex"}}
             >
-            <h3>{flipCards[0] ? header : newUserHeader}</h3>
+            <h3>{cardsToLearn[0] ? header : newUserHeader}</h3>
             <div className='carousel'>
                 <BsChevronCompactLeft 
                     className="carousel-arrow left"
                     onClick={slideLeft}
                 />
-                <ul className="cards">{flipCards.map((flipCard, n) => {
+                <ul className="cards">{cardsToLearn.map((flipCard, n) => {
                     let position = n > index ? "next-card" : n === index ? "active-card" : "prev-card";
                     let label = cardOption === 'save' ? "save-label" : cardOption === 'delete' ? "delete-label" : "";
                     return (
@@ -152,7 +160,7 @@ export default function FlipCards({isActive}) {
                     onClick={slideRight}
                 />
             </div>
-            <p>{flipCards[0] ? `${index+1}/${numberOfCards}` : ""}</p>
+            <p>{cardsToLearn[0] ? `${index+1}/${numberOfCards}` : ""}</p>
             <div className="target-wrapper">
                 <div 
                     style={dropArea ? null : {visibility: "hidden"}} 
@@ -165,6 +173,15 @@ export default function FlipCards({isActive}) {
                     <BsTrash className="icon icon-trash" />
                     </div>
             </div>
+            <ul>
+            {savedCards.map(card => {
+                return (
+                    <li>
+                        <span>{card.name}</span> - {card.definition}
+                    </li>
+                )
+            })}
+            </ul>
         </div>
     )
 }

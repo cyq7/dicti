@@ -43,7 +43,8 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
             return [...prevFlipCards, {
                 id: uuidv4(),
                 name: word,
-                definition: definition
+                definition: definition,
+                learned: false
             }]
         })
         handleClose()

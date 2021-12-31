@@ -32,7 +32,7 @@ export default function WordDetails({details, handleSearch, resetActiveWord}) {
         const definitionsList = details.map(word => {
         const title = word.word;
         const meanings = word.meanings
-        const phoneticText = word.phonetics;
+        const phonetics = word.phonetics;
 
         const singleMeaning = meanings.map(item => {
             const partOfSpeech = item.partOfSpeech;
@@ -74,13 +74,13 @@ export default function WordDetails({details, handleSearch, resetActiveWord}) {
             <div key={`${title} ${uuidv4()}`} className="definitions">
                 <div className="word-label">
                     <button 
-                        onClick={() => {playAudio(phoneticText[0].audio)}} 
+                        onClick={() => {playAudio(phonetics[0].audio)}} 
                         className="audio">
-                        {phoneticText[0].audio ? <AiOutlineAudio className='icon'/> : null}
+                        {phonetics[0].audio ? <AiOutlineAudio className='icon'/> : null}
                     </button>
                     <div>
                         <h2>{title}</h2>
-                        <p className="phonetic">- {phoneticText.length > 0 ? phoneticText[0].text : null} -</p>
+                        <p className="phonetic">- {phonetics.length > 0 ? phonetics[0].text : null} -</p>
                     </div>
                     <button onClick={handleClick} className = "open-card-form-btn" > <VscDiffAdded className='icon'/></button>
                 </div>
