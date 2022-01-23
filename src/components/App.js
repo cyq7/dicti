@@ -41,7 +41,6 @@ function App() {
 
   function handleHomeClick() {
       setActiveWord("");
-      inputValueRef.current.value = "";
   }
 
   if(errorOccurred) {
@@ -52,10 +51,10 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Header />
     <Routes>
       <Route path="/" element={
           <div className="app">
-      <Header />
       <form onSubmit={(e) => {
         e.preventDefault();
         handleSearch();
@@ -72,14 +71,6 @@ function App() {
         isActive={activeWord}
         storedFlipCards={storedFlipCards}
       />
-      <NavBar
-        onHomeClick={handleHomeClick}
-      />
-      {errorOccurred ? 
-      <Notification 
-        message={'No such word in the dictionary'}
-      /> 
-      : null}
     </div>
       }></Route>
       <Route path='stats' element={
@@ -89,6 +80,14 @@ function App() {
       }></Route>
       <Route path='settings' element={<Settings />}></Route>
     </Routes>
+          <NavBar
+        onHomeClick={handleHomeClick}
+      />
+      {errorOccurred ? 
+      <Notification 
+        message={'No such word in the dictionary'}
+      /> 
+      : null}
   </BrowserRouter>
   );
 }
