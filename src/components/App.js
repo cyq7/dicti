@@ -1,4 +1,9 @@
 import React, { useState, useRef } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 import axios from 'axios';
 import Header from './Header'
 import WordDetails from './WordDetails'
@@ -6,6 +11,7 @@ import FlipCards from './FlipCards'
 import NavBar from './NavBar'
 import Notification from './Notification'
 import Stats from './Stats'
+import Settings from './Settings'
 import { FiSearch } from 'react-icons/fi'
 import './styles/App.scss'
 
@@ -45,7 +51,10 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={
+          <div className="app">
       <Header />
       <form onSubmit={(e) => {
         e.preventDefault();
@@ -66,15 +75,21 @@ function App() {
       <NavBar
         onHomeClick={handleHomeClick}
       />
-      <Stats 
-        storedFlipCards={storedFlipCards}
-      />
       {errorOccurred ? 
       <Notification 
         message={'No such word in the dictionary'}
       /> 
       : null}
     </div>
+      }></Route>
+      <Route path='stats' element={
+        <Stats 
+          storedFlipCards={storedFlipCards}
+        />
+      }></Route>
+      <Route path='settings' element={<Settings />}></Route>
+    </Routes>
+  </BrowserRouter>
   );
 }
 
