@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
     padding-bottom: 15%;
     overflow-x: hidden;
     margin-top: 100px;
@@ -18,9 +17,9 @@
         .search-bar {
             width: 70%;
             font-size: 1.5em;
-            padding: 2% 5%;
+            padding: 2% 3%;
             margin: 3%;
-            box-shadow: 0 4px 10px #ccc;
+            box-shadow: 0 3px 10px #bbb;
             border: 1px solid #eee;
         }
 
@@ -31,3 +30,4 @@
         }
     }
 }
+

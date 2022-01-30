@@ -51,36 +51,44 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Header />
     <Routes>
       <Route path="/" element={
-          <div className="app">
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        handleSearch();
-      }}>
-        <input ref={inputValueRef} className="search-bar" type="text"></input>
-        <FiSearch onClick={handleSearch} className="search-icon"/>
-      </form>
-      <WordDetails
-        details = {activeWord}
-        handleSearch = {handleSearchOnClick}
-        resetActiveWord = {() => setActiveWord('')}
-      />
-      <FlipCards
-        isActive={activeWord}
-        storedFlipCards={storedFlipCards}
-      />
-    </div>
+        <div className="app">
+          <Header 
+            title="dicti"
+          />
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}>
+            <input ref={inputValueRef} className="search-bar" type="text"></input>
+            <FiSearch onClick={handleSearch} className="search-icon"/>
+          </form>
+          <WordDetails
+            details = {activeWord}
+            handleSearch = {handleSearchOnClick}
+            resetActiveWord = {() => setActiveWord('')}
+          />
+          <FlipCards
+            isActive={activeWord}
+            storedFlipCards={storedFlipCards}
+          />
+        </div>
       }></Route>
       <Route path='stats' element={
-        <Stats 
-          storedFlipCards={storedFlipCards}
-        />
+        <div>
+          <Header title="Statistics"/>
+          <Stats storedFlipCards={storedFlipCards}/>
+        </div>
       }></Route>
-      <Route path='settings' element={<Settings />}></Route>
+      <Route path='settings' element={
+        <div>
+          <Header title="Settings"/>
+          <Settings />
+        </div>
+      }></Route>
     </Routes>
-          <NavBar
+      <NavBar
         onHomeClick={handleHomeClick}
       />
       {errorOccurred ? 

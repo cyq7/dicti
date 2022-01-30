@@ -148,6 +148,7 @@ export default function FlipCards({storedFlipCards, isActive}) {
                             definition={flipCard.definition}
                             position={position}
                             label={label}
+                            level={flipCard.level}
                             handlePointerEvent={onPointerEvent}
                         />
                     )

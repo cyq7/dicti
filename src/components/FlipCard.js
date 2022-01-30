@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles/FlipCard.scss'
 
-export default function FlipCard({id, name, definition, handlePointerEvent, position, label}) {
+export default function FlipCard({id, name, definition, handlePointerEvent, position, label, level}) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const cardClass = `flip-card-inner ${label}`
@@ -16,9 +16,11 @@ export default function FlipCard({id, name, definition, handlePointerEvent, posi
             <div id={id} className={cardClass}>
                 <div className="flip-card-front">
                     <span>{name}</span>
+                    <div className={`level ${level}`}></div>
                 </div>
                 <div className="flip-card-back">
                     <p>{definition}</p>
+                    <div className={`level ${level}`}></div>
                 </div>
             </div>
         </div>

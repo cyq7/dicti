@@ -7,6 +7,7 @@ import './styles/FlipCardForm.scss'
 
 export default function FlipCardForm({currentDefinitions, word, displayForm, handleClose, resetActiveWord}) {
     const [flipCards, setFlipCards] = useState([]);
+    const [level, setLevel] = useState('medium');
     const [chosenDefinition, setChosenDefinition] = useState('');
     const [errorOccured, setErrorOccurred] = useState('');
     const textAreaRef = useRef();
@@ -19,6 +20,10 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
 
     function handleChange(e) {
         setChosenDefinition(e.target.value);
+    }
+
+    function handleLevelChange(e) {
+        setLevel(e.target.value);
     }
 
     useEffect(()=> {
@@ -44,7 +49,8 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
                 id: uuidv4(),
                 name: word,
                 definition: definition,
-                learned: false
+                learned: false,
+                level: level
             }]
         })
         handleClose()
@@ -68,6 +74,30 @@ export default function FlipCardForm({currentDefinitions, word, displayForm, han
             <div className="flip-card-container">
                 <form onSubmit={handleAdd} className="flip-card-form">
                     <span>{word}</span>
+                    <p>Specify word difficulty</p>
+                     <div className="difficulty">
+                        <div className="radio">
+                        <label>
+                            <input type="radio" value="easy" 
+                            checked={level === 'easy'} onChange={handleLevelChange}/>
+                            Easy
+                        </label>
+                        </div>
+                        <div className="radio">
+                        <label>
+                            <input type="radio" value="medium" 
+                            checked={level === 'medium'} onChange={handleLevelChange}/>
+                            Medium
+                        </label>
+                        </div>
+                        <div className="radio">
+                        <label>
+                            <input type="radio" value="hard" 
+                            checked={level === 'hard'} onChange={handleLevelChange}/>
+                            Hard
+                        </label>
+                        </div>
+                    </div>
                     <p>Specify word definition</p>
                     <div className="select-wrapper">
                         <select onChange={handleChange} className="select">

@@ -50,11 +50,37 @@ article {
             p {
                 font-size: 1.2em;
             }
+
+            .level {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                width: 1em;
+                height: 1em;
+                border-radius: 50%;
+                background:rgba(0, 0, 0, 0.1);
+            }
+
+            .easy {
+                background:rgb(129, 214, 96)
+            }
+
+            .medium {
+                background:rgb(255, 186, 108)
+            }
+
+            .hard {
+                background:rgb(255, 108, 108)
+            }
         }
 
         .flip-card-back {
             transform: rotateY(180deg);
             padding: 2em;
+
+            .level {
+                left: 30px;
+            }
         }
     }
 }
@@ -70,6 +96,8 @@ article {
     pointer-events: none;
 
         .flip-card-inner {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
             color: #ddd;
             box-shadow: 0 0 5px #ccc;
         }

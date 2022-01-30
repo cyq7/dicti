@@ -4,10 +4,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5% 0 0;
+    padding: 30px 0 0;
     width: 100%;
     text-align: center;
-    max-height: 100vh;
 
     .carousel {
         position: relative;
@@ -35,11 +34,11 @@
         }
 
         .right {
-            right: 0;
+            left: calc(60% + 120px);
         }
 
         .left {
-            left: 0;
+            right: calc(60% + 120px);
         }
     }
 
